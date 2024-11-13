@@ -5,4 +5,4 @@ def sum(integers):
     else:
         return integers.pop(0)
 
-print(sum([1,2,3]))
+print(sum([1,2,4]))
