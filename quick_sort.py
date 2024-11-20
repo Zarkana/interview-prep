@@ -51,6 +51,7 @@ def partition(arr, start, stop_before, pivot):
             elif high == pivot:
                 pivot = low
 
+
 def test(input, output):
     print(f"Unsorted: {input}")
     qsort(input, 0, len(input))

@@ -1,0 +1,4 @@
+What is the base case and recursive case for binary search?
+
+Base Case: One element in list
+Recursive Case: More than one element in list
