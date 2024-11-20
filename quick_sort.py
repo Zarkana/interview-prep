@@ -8,47 +8,36 @@ def qsort(arr, start, stop_before):
     if(partition_size) < 2:
         return
     else:
-        # Choose a random pivot element from the array
-        pivot = random.randint(start, stop_before-1)
-        # print(f"random_pivot: {pivot}, start: {start}, stop_before: {stop_before}")
         # Partition the array:
-        pivot = partition(arr, start, stop_before, pivot)
+        boundary = partition(arr, start, stop_before)
         # Recursively sort the left and right partitions
-        qsort(arr, start, pivot)
-        qsort(arr, pivot+1, stop_before)
+        qsort(arr, start, boundary + 1)
+        qsort(arr, boundary+1, stop_before)
 
-def partition(arr, start, stop_before, pivot):
+def partition(arr, start, stop_before):
+    pivot_value = arr[start]
     # The partitioning step uses two pointers to scan the array:
-    low = start
-    high = stop_before - 1
-    pivot_value = arr[pivot]
-    while low < high:
-        # Find the element that needs to be swapped higher
-        while low < pivot:
-            if arr[low] >= pivot_value:
-                break
-            else:
-                low += 1
-    
-        # Find the element that needs to be swapped lower
-        while high > pivot:
-            if arr[high] < pivot_value:
-                break
-            else:
-                high -= 1
+    low = start - 1
+    high = stop_before
 
-        
+    while True:
+        # Move low pointer to the right until an element >= pivot is found
+        low += 1
+        # Find the element that needs to be swapped higher
+        while arr[low] < pivot_value:
+            low += 1
+    
+        # Move high pointer to the left until an element <= pivot is found
+        high -= 1
+        # Find the element that needs to be swapped lower
+        while arr[high] > pivot_value:
+            high -= 1
+
         if low >= high:
             # This continues until the pointers cross, and the pivot is placed in its correct position.
-            return pivot
-        else:
-            arr[low], arr[high] = arr[high], arr[low]
-            # # When pivot moves the pivot index must also move, otherwise we may have values that are no longer for sure less than or greater than the pivot value
-            if low == pivot:
-                pivot = high
-            elif high == pivot:
-                pivot = low
-
+            return high
+        
+        arr[low], arr[high] = arr[high], arr[low]
 
 def test(input, output):
     print(f"Unsorted: {input}")
