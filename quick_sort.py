@@ -42,10 +42,8 @@ def partition(arr, start, stop_before, pivot):
             # This continues until the pointers cross, and the pivot is placed in its correct position.
             return pivot
         else:
-            temp = arr[low]
-            arr[low] = arr[high]
-            arr[high] = temp
-            # When pivot moves the pivot index must also move, otherwise we may have values that are no longer for sure less than or greater than the pivot value
+            arr[low], arr[high] = arr[high], arr[low]
+            # # When pivot moves the pivot index must also move, otherwise we may have values that are no longer for sure less than or greater than the pivot value
             if low == pivot:
                 pivot = high
             elif high == pivot:
